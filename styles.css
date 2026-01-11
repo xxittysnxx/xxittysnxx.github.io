@@ -1,0 +1,897 @@
+/* Cyberpunk 2077 Theme - CD Projekt Red */
+/* CSS Variables */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Rubik+Glitch&display=swap');
+
+:root {
+    --cp-yellow: #FCEE0A;
+    --cp-black: #050505;
+    --cp-dark-bg: #121212;
+    --cp-cyan: #00F0FF;
+    --cp-red: #FF003C;
+    --cp-pale-red: #ff5e7d;
+    --cp-grid-color: rgba(255, 255, 255, 0.05);
+
+    /* Updated Fonts */
+    --font-display: 'Orbitron', sans-serif;
+    /* Matches CP2077 Logo */
+    --font-mono: 'Rajdhani', sans-serif;
+    /* Matches "Ultimate Edition" / UI */
+
+    --clip-angle: 15px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+::selection {
+    background: var(--cp-cyan);
+    color: var(--cp-black);
+}
+
+body {
+    background-color: var(--cp-yellow);
+    background-image:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 1px,
+            var(--cp-black) 1px,
+            var(--cp-black) 3px);
+    background-size: 100% 4px;
+    color: var(--cp-yellow);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+    line-height: 1.5;
+    min-height: 100vh;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Authentic CP2077 Background Wrapper */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cp-black);
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+        linear-gradient(90deg, var(--cp-grid-color) 1px, transparent 1px),
+        linear-gradient(180deg, var(--cp-grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Gritty Texture Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+}
+
+/* Scanline Effect */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1001;
+    animation: scrollLines 5s linear infinite;
+}
+
+@keyframes scrollLines {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Header & Nav */
+.cyber-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid var(--cp-red);
+    position: relative;
+}
+
+.cyber-header::before {
+    content: "SYSTEM_READY //";
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    font-size: 0.7rem;
+    color: var(--cp-red);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.cyber-header h1 {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--cp-yellow);
+    background: var(--cp-black);
+    padding: 0 10px;
+    margin-left: -10px;
+    text-shadow: 2px 2px 0px var(--cp-cyan);
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 95% 100%, 0 100%);
+}
+
+/* Navigation - HUD Style */
+.cyber-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.cyber-link {
+    text-decoration: none;
+    color: var(--cp-cyan);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.cyber-link:hover,
+.cyber-link.active {
+    background: var(--cp-cyan);
+    color: var(--cp-black);
+    border-color: var(--cp-cyan);
+    box-shadow: 2px 2px 0 var(--cp-red);
+}
+
+.cyber-link.active {
+    background: var(--cp-yellow);
+    border-color: var(--cp-yellow);
+    box-shadow: 2px 2px 0 var(--cp-cyan);
+}
+
+/* CP2077 Glitch Effect */
+.glitch {
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cp-black);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 var(--cp-red);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: cp-glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 var(--cp-cyan);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: cp-glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes cp-glitch-anim {
+    0% {
+        clip: rect(10px, 9999px, 80px, 0);
+        transform: skew(0.5deg);
+    }
+
+    5% {
+        clip: rect(30px, 9999px, 10px, 0);
+        transform: skew(0.5deg);
+    }
+
+    10% {
+        clip: rect(70px, 9999px, 90px, 0);
+        transform: skew(-1deg);
+    }
+
+    15% {
+        clip: rect(20px, 9999px, 50px, 0);
+        transform: skew(0.2deg);
+    }
+
+    20% {
+        clip: rect(60px, 9999px, 10px, 0);
+        transform: skew(0.1deg);
+    }
+
+    100% {
+        clip: rect(80px, 9999px, 30px, 0);
+        transform: skew(0deg);
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(5, 5, 5, 0.85);
+    padding: 3rem;
+    border: 1px solid var(--cp-yellow);
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--cp-yellow);
+    border-left: 2px solid var(--cp-yellow);
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--cp-yellow);
+    border-right: 2px solid var(--cp-yellow);
+}
+
+/* Profile Photo */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.profile-frame {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+    background: var(--cp-yellow);
+    padding: 2px;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+    transition: filter 0.3s;
+}
+
+/* Profile Glitch Toggle Effect */
+.profile-img.glitching {
+    animation: glitch-swap 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes glitch-swap {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+        filter: grayscale(0%);
+    }
+
+    20% {
+        transform: translate(-5px, 5px);
+        clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+        filter: grayscale(100%) contrast(200%) hue-rotate(90deg);
+        opacity: 0.8;
+    }
+
+    40% {
+        transform: translate(5px, -5px);
+        clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+        filter: grayscale(100%) contrast(150%) hue-rotate(180deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0;
+        /* Moment of swap */
+        transform: scale(1.1);
+    }
+
+    60% {
+        transform: translate(-5px, 5px);
+        clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+        filter: grayscale(100%) contrast(200%) hue-rotate(270deg);
+        opacity: 0.5;
+    }
+
+    80% {
+        transform: translate(5px, -5px);
+        clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+        filter: grayscale(100%) contrast(150%);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(0);
+        opacity: 1;
+        filter: grayscale(0%);
+        clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+        /* Restore original shape */
+    }
+}
+
+.frame-corner {
+    display: none;
+}
+
+/* Removed old styling elements */
+
+/* Terminal / Shard Style Info */
+.terminal-window {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+}
+
+.terminal-header {
+    background: var(--cp-red);
+    color: var(--cp-black);
+    padding: 5px 15px;
+    font-weight: bold;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    width: fit-content;
+    margin: 0 auto 1rem auto;
+}
+
+.terminal-header .dot {
+    display: none;
+}
+
+.terminal-header .title {
+    margin-left: 0;
+    color: var(--cp-black);
+    font-size: 0.9rem;
+}
+
+.terminal-body {
+    padding: 0;
+    color: var(--cp-cyan);
+    font-size: 1rem;
+    border-left: none;
+    border-top: 2px solid var(--cp-cyan);
+    padding-top: 15px;
+    padding-left: 0;
+    text-align: left;
+    width: 600px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Terminal Utilities */
+.typing-line::after {
+    content: '▋';
+    animation: blink 1s step-end infinite;
+    color: var(--cp-yellow);
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.highlight {
+    color: var(--cp-yellow);
+    font-weight: bold;
+}
+
+.neon-text {
+    color: var(--cp-cyan);
+    text-shadow: 0 0 5px var(--cp-cyan);
+}
+
+/* Bio Section */
+.bio-section {
+    text-align: center;
+    margin-top: 0;
+    padding: 0;
+    border: none;
+    width: 100%;
+}
+
+.role-title {
+    font-family: var(--font-display);
+    color: var(--cp-yellow);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0 var(--cp-red);
+}
+
+.role-company {
+    color: var(--cp-cyan);
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--cp-red);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.bio-text {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 0 auto 2.5rem auto;
+    max-width: 700px;
+}
+
+/* Contact Details */
+.contact-details {
+    background: rgba(255, 0, 60, 0.1);
+    /* Low opacity red */
+    padding: 1.5rem;
+    border-left: 4px solid var(--cp-red);
+    border-right: 4px solid var(--cp-red);
+    /* Symmetric look */
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.contact-details p {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.contact-details .label {
+    background: var(--cp-yellow);
+    color: var(--cp-black);
+    padding: 2px 5px;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 0.8rem;
+    min-width: 60px;
+    display: inline-block;
+    text-align: center;
+}
+
+.contact-details a:hover {
+    color: var(--cp-cyan) !important;
+    transform: translate(-2px, -2px);
+}
+
+.skills-section {
+    width: 100%;
+}
+
+/* Skills HUD */
+.skills-hud {
+    margin-top: 2rem;
+    border: 1px solid var(--cp-grid-color);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+}
+
+.skills-hud::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--cp-cyan);
+    border-right: 2px solid var(--cp-cyan);
+}
+
+.hud-title {
+    color: var(--cp-pale-red);
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    border-bottom: 1px dotted var(--cp-pale-red);
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+.skill-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.skill-name {
+    width: 100px;
+    font-size: 0.8rem;
+    color: var(--cp-cyan);
+    font-weight: bold;
+    text-align: left;
+}
+
+.progress-track {
+    flex-grow: 1;
+    height: 10px;
+    background: #111;
+    border: 1px solid #333;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    min-width: 100px;
+    /* Ensure it doesn't collapse */
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--cp-yellow);
+    box-shadow: 0 0 10px var(--cp-yellow);
+    animation: loadSkill 1.5s ease-out forwards;
+    width: 0;
+    /* Animated to width */
+}
+
+@keyframes loadSkill {
+    to {
+        width: var(--final-width, 100%);
+    }
+
+    /* JS would set variable, but for now we rely on inline style width and standard animation fills parent, wait - actually just animating 'width' from 0 doesn't work well with inline styles unless we set keyframes dynamically. Let's use a simpler transform approach or just let it start at width. */
+    /* Revised animation approach below */
+}
+
+/* Overriding animation for simplicity in pure CSS: */
+.progress-fill {
+    animation: none;
+}
+
+/* Links & Buttons */
+.links-section {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.cyber-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--cp-grid-color);
+    padding: 2rem;
+}
+
+.cyber-card h3 {
+    color: var(--cp-red);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    border-bottom: none;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.cyber-button {
+    position: relative;
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--cp-yellow);
+    color: var(--cp-black);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border: none;
+    box-shadow: 3px 3px 0 var(--cp-red);
+}
+
+.cyber-button:hover {
+    background: var(--cp-cyan);
+    box-shadow: -3px 3px 0 var(--cp-yellow);
+    transform: translate(-2px, -2px);
+    color: var(--cp-black);
+}
+
+.cyber-button .icon {
+    position: relative;
+    z-index: 2;
+}
+
+/* Footer */
+.cyber-footer {
+    margin-top: 5rem;
+    text-align: center;
+    color: var(--cp-cyan);
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid var(--cp-red);
+    padding-top: 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+/* --- Content Page Styles (About & Projects) --- */
+
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    color: var(--cp-yellow);
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    border-left: 10px solid var(--cp-red);
+    padding-left: 1rem;
+    background: linear-gradient(90deg, rgba(255, 0, 60, 0.1), transparent);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+}
+
+.subsection-title {
+    font-family: var(--font-mono);
+    color: var(--cp-cyan);
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    border-bottom: 1px dashed var(--cp-cyan);
+    display: inline-block;
+}
+
+/* Timeline */
+.timeline {
+    border-left: 2px solid var(--cp-red);
+    margin-left: 1rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 10px;
+    height: 10px;
+    background: var(--cp-red);
+    box-shadow: 0 0 10px var(--cp-red);
+}
+
+.timeline-item {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.6rem;
+    top: 0.2rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    background: var(--cp-black);
+    border: 2px solid var(--cp-cyan);
+    border-radius: 0;
+    transform: rotate(45deg);
+}
+
+.timeline-date {
+    font-family: var(--font-display);
+    color: var(--cp-red);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.timeline-content h3 {
+    color: var(--cp-yellow);
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+}
+
+.timeline-content h4 {
+    color: var(--cp-cyan);
+    font-family: var(--font-mono);
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* Grid & Cards */
+.grid-container,
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card,
+.project-card {
+    display: block;
+    background: rgba(5, 5, 5, 0.7);
+    border: 1px solid var(--cp-grid-color);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    border-left: 2px solid var(--cp-cyan);
+}
+
+.education-card {
+    border-left-color: var(--cp-yellow);
+}
+
+.project-card:hover,
+.card:hover {
+    background: rgba(0, 240, 255, 0.1);
+    transform: translate(-5px, -5px);
+    box-shadow: 5px 5px 0 var(--cp-red);
+    border-color: var(--cp-cyan);
+}
+
+.card h3,
+.project-card h4 {
+    color: var(--cp-yellow);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    color: var(--cp-cyan);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.date,
+.details {
+    color: #aaa;
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+}
+
+/* Tags */
+.lang-tag,
+.tag {
+    float: right;
+    font-size: 0.7rem;
+    background: var(--cp-black);
+    color: var(--cp-yellow);
+    border: 1px solid var(--cp-yellow);
+    padding: 2px 8px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.project-card p {
+    clear: both;
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .terminal-body {
+        border-left: none;
+        border-top: 2px solid var(--cp-cyan);
+        padding-top: 1rem;
+        padding-left: 0;
+    }
+
+    .bio-section {
+        text-align: center;
+    }
+
+    .contact-details {
+        text-align: left;
+    }
+
+    .cyber-header {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .cyber-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
