@@ -217,8 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mainSrc = 'assets/ai_profile.png';
         const altSrcs = [
             'assets/cyber_profile.png',
-            'assets/cyber_profile_2.png',
-            'assets/cyber_profile_3.png'
+            'assets/cyber_profile_2.png'
         ];
 
         profileImg.addEventListener('click', () => {
