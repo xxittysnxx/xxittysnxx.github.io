@@ -215,7 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileImg) {
         let isAlt = false;
         const mainSrc = 'assets/ai_profile.png';
-        const altSrc = 'assets/cyber_profile.png'; // Assuming this exists
+        const altSrcs = [
+            'assets/cyber_profile.png',
+            'assets/cyber_profile_2.png',
+            'assets/cyber_profile_3.png'
+        ];
 
         profileImg.addEventListener('click', () => {
             if (profileImg.classList.contains('glitching')) return; // Prevent spam
@@ -228,7 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isAlt) {
                     profileImg.src = mainSrc;
                 } else {
-                    profileImg.src = altSrc;
+                    const randomIndex = Math.floor(Math.random() * altSrcs.length);
+                    profileImg.src = altSrcs[randomIndex];
                 }
                 isAlt = !isAlt;
             }, 300);
